@@ -2,8 +2,8 @@ from dataclasses import dataclass
 from datetime import datetime
 
 from ..enums import PullState
-from .owner import Owner
 from .total import CommitTotal
+from .user import Owner
 
 __all__ = ["Pull"]
 

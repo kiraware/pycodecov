@@ -2,9 +2,9 @@ from dataclasses import dataclass
 from datetime import datetime
 
 from ..enums import CommitState
-from .owner import GitAuthor, Owner
 from .report import Report
 from .total import CommitTotal
+from .user import GitAuthor, Owner
 
 __all__ = [
     "BaseCommit",

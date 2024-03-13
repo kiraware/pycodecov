@@ -24,12 +24,11 @@ from .coverage import CommitCoverage, CommitCoverageReport, CommitCoverageTotal
 from .coverage_trend import CoverageTrend
 from .flag import Flag
 from .line import Line
-from .owner import GitAuthor, Owner
 from .pull import Pull
 from .repo import Repo, RepoConfig
 from .report import BaseReportFile, Report, ReportFile
 from .total import BaseTotal, CommitTotal, ReportTotal
-from .user import User
+from .user import GitAuthor, Owner, User
 
 __all__ = [
     "Branch",
@@ -58,8 +57,6 @@ __all__ = [
     "CoverageTrend",
     "Flag",
     "Line",
-    "GitAuthor",
-    "Owner",
     "Pull",
     "Repo",
     "RepoConfig",
@@ -69,5 +66,7 @@ __all__ = [
     "BaseTotal",
     "CommitTotal",
     "ReportTotal",
+    "GitAuthor",
+    "Owner",
     "User",
 ]
