@@ -47,4 +47,4 @@ class Report:
     """
 
     totals: ReportTotal
-    files: list[ReportFile]
+    files: list[BaseReportFile]

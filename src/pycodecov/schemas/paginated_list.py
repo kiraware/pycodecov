@@ -26,3 +26,9 @@ class PaginatedList(Generic[T]):
     previous: CodecovUrl | None
     results: list[T]
     total_pages: int
+
+    def __len__(self):
+        return len(self.results)
+
+    def __getitem__(self, index: int):
+        return self.results[index]

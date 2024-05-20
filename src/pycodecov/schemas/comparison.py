@@ -8,7 +8,6 @@ from .total import ReportTotal
 
 __all__ = [
     "CommitComparison",
-    "Comparison",
     "ComponentComparison",
     "DiffComparison",
     "FileChangeSummaryComparison",
@@ -197,9 +196,9 @@ class CommitComparison:
 
 
 @dataclass(slots=True)
-class Comparison:
+class ComponentComparison(Component):
     """
-    A schema used to store info about comparison.
+    A schema used to store info about component comparison.
 
     Attributes:
         base_report_totals: base totals coverage report information.
@@ -213,14 +212,16 @@ class Comparison:
 
 
 @dataclass(slots=True)
-class ComponentComparison(Component, Comparison):
-    """
-    A schema used to store info about component comparison.
-    """
-
-
-@dataclass(slots=True)
-class FlagComparison(Flag, Comparison):
+class FlagComparison(Flag):
     """
     A schema used to store info about flag comparison.
+
+    Attributes:
+        base_report_totals: base totals coverage report information.
+        head_report_totals: head totals coverage report information.
+        diff_totals: diff totals coverage report information.
     """
+
+    base_report_totals: ReportTotal
+    head_report_totals: ReportTotal
+    diff_totals: ReportTotal | None

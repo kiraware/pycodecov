@@ -6,7 +6,6 @@ from .branch import Branch, BranchDetail
 from .commit import BaseCommit, Commit, CommitDetail, GitCommit
 from .comparison import (
     CommitComparison,
-    Comparison,
     ComponentComparison,
     DiffComparison,
     FileChangeSummaryComparison,
@@ -39,7 +38,6 @@ __all__ = [
     "CommitDetail",
     "GitCommit",
     "CommitComparison",
-    "Comparison",
     "ComponentComparison",
     "DiffComparison",
     "FileChangeSummaryComparison",
