@@ -32,7 +32,7 @@ theme:
       toggle:
         icon: material/brightness-auto
         name: Switch to light mode
-      primary: light blue
+      primary: yellow
 
     # Palette toggle for light mode
     - media: "(prefers-color-scheme: light)"
@@ -40,7 +40,7 @@ theme:
       toggle:
         icon: material/brightness-7
         name: Switch to dark mode
-      primary: light blue
+      primary: yellow
 
     # Palette toggle for dark mode
     - media: "(prefers-color-scheme: dark)"
@@ -48,7 +48,7 @@ theme:
       toggle:
         icon: material/brightness-4
         name: Switch to system preference
-      primary: light blue
+      primary: yellow
 
 nav:
   - Home: index.md
@@ -57,13 +57,17 @@ nav:
   - Reference:
       - API: reference/api.md
       - reference/exception.md
-      - reference/enum.md
       - reference/schema.md
+      - reference/enum.md
 
 markdown_extensions:
+  - admonition
+  - pymdownx.details
   - pymdownx.highlight:
       anchor_linenums: true
   - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
 
 repo_url: https://github.com/kiraware/pycodecov
 repo_name: kiraware/pycodecov
