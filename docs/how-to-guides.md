@@ -2,6 +2,27 @@
 
 ## Contributing
 
+Thank you for your interest in contributing to pycodecov!
+We welcome contributions from everyone. Before you get
+started, please take a moment to review the following
+guidelines.
+
+### Code of Conduct
+
+Please note that this project adheres to the Contributor
+Covenant Code of Conduct. By participating, you are
+expected to uphold this code. Please report any
+unacceptable behavior.
+
+### Ways to Contribute
+
+Here are a few ways you can contribute to pycodecov:
+
+- Reporting bugs
+- Suggesting new features
+- Writing or improving documentation
+- Submitting bug fixes or enhancements via Pull Requests
+
 ### Getting Started
 
 You can contribute directly to pycodecov by submit a pull
@@ -34,11 +55,11 @@ example in the following command:
 git branch fix-docs-typos
 ```
 
-And don't forget to checkout and start making changes
+And don't forget to switch and start making changes
 from there.
 
 ```console
-git checkout fix-docs-typos
+git switch fix-docs-typos
 ```
 
 After that, make sure your terminal's working directory
@@ -58,11 +79,14 @@ dependency with the following command:
 poetry install
 ```
 
-And done! You can contribute directly by getting your hands wet.
-If you have installed [poethepoet](https://poethepoet.natn.io/index.html)
-globally, then you can use the command below only with `poe lint`,
-`poe format`, etc instead of `poetry run poe lint`,
-`poetry run poe format`, etc.
+And done! You can make your changes and test thoroughly.
+Then push your branch to your fork and submit a pull request.
+
+!!! tip
+    If you have installed [poethepoet](https://poethepoet.natn.io/index.html)
+    globally, then you can use the command below only with
+    `poe lint`, `poe format`, etc instead of `poetry run poe lint`,
+    `poetry run poe format`, etc.
 
 ### Linting
 
@@ -106,6 +130,11 @@ We really pay attention to testing coverage, therefore to
 contribute we are expected to make tests and if possible increase
 the code coverage.
 
+To carry out testing, you need to prepare environment variables.
+For example, environment variables are found in the `.env.example`
+file. You can change the value according to what you have and save
+it in the root of the project directory with the file name `.env`.
+
 ### Documenting
 
 We use [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/)
@@ -128,8 +157,13 @@ poetry run mkdocs serve
 
 ### Releasing
 
-We use the GitHub workflow to automatically release to PyPi when we
-release to Github. The special environment for people who have access
-to the workflow is in the Github environment with the name `production`.
+We use the GitHub workflow to automatically release to PyPI when we
+release to GitHub. The special environment for people who have access
+to the workflow is in the GitHub environment with the name `production`.
 Each release tag must be the same as `version` in `pyproject.toml` in
 the `tool.poetry` section.
+
+### License
+
+By contributing to pycodecov, you agree that your contributions will be
+licensed under the project's [MIT License](https://github.com/kiraware/pycodecov/blob/main/LICENSE).
