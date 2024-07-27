@@ -7,13 +7,11 @@ on:
 
 jobs:
   publish:
-    strategy:
-      fail-fast: false
+    permissions:
+      contents: read
+      id-token: write
     runs-on: ubuntu-latest
     environment: production
-    permissions:
-      id-token: write
-      contents: read
     steps:
       - name: Checkout source code
         uses: actions/checkout@v4
@@ -29,9 +27,11 @@ jobs:
       - name: Mint token
         id: mint
         uses: tschm/token-mint-action@v1.0.3
-      - name: Publish to PyPi
+      - name: Publish to PyPI
         env:
           PYPI_TOKEN: ${{ steps.mint.outputs.api-token }}
         run: |
           poetry config pypi-token.pypi $PYPI_TOKEN
           poetry publish --build
+    strategy:
+      fail-fast: false
