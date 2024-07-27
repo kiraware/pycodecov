@@ -12,29 +12,29 @@ class Service(StrEnum):
     A str enum class that define valid Git hosting service provider.
 
     Attributes:
-        GITHUB: `"github"`
-        GITLAB: `"gitlab"`
         BITBUCKET: `"bitbucket"`
-        GITHUB_ENTERPRISE: `"github_enterprise"`
-        GITLAB_ENTERPRISE: `"gitlab_enterprise"`
         BITBUCKET_SERVER: `"bitbucket_server"`
+        GITHUB: `"github"`
+        GITHUB_ENTERPRISE: `"github_enterprise"`
+        GITLAB: `"gitlab"`
+        GITLAB_ENTERPRISE: `"gitlab_enterprise"`
 
     Examples:
-        >>> Service("github")
-        <Service.GITHUB: 'github'>
-        >>> Service["GITHUB"]
-        <Service.GITHUB: 'github'>
-        >>> Service.GITHUB
-        <Service.GITHUB: 'github'>
-        >>> Service.GITHUB == "github"
+        >>> Service("bitbucket")
+        <Service.BITBUCKET: 'bitbucket'>
+        >>> Service["BITBUCKET"]
+        <Service.BITBUCKET: 'bitbucket'>
+        >>> Service.BITBUCKET
+        <Service.BITBUCKET: 'bitbucket'>
+        >>> Service.BITBUCKET == "bitbucket"
         True
-        >>> print(Service.GITHUB)
-        github
+        >>> print(Service.BITBUCKET)
+        bitbucket
     """
 
-    GITHUB: str = "github"
-    GITLAB: str = "gitlab"
     BITBUCKET: str = "bitbucket"
-    GITHUB_ENTERPRISE: str = "github_enterprise"
-    GITLAB_ENTERPRISE: str = "gitlab_enterprise"
     BITBUCKET_SERVER: str = "bitbucket_server"
+    GITHUB: str = "github"
+    GITHUB_ENTERPRISE: str = "github_enterprise"
+    GITLAB: str = "gitlab"
+    GITLAB_ENTERPRISE: str = "gitlab_enterprise"
