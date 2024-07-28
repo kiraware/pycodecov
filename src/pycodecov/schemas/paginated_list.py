@@ -32,3 +32,6 @@ class PaginatedList(Generic[T]):
 
     def __getitem__(self, index: int):
         return self.results[index]
+
+    def __iter__(self):
+        return iter(self.results)
