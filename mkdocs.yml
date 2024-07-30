@@ -52,7 +52,10 @@ theme:
 
 nav:
   - Home: index.md
-  - tutorials.md
+  - Tutorial:
+      - index.md
+      - codecov.md
+      - user.md
   - How-To Guides: how-to-guides.md
   - Reference:
       - API: reference/api.md

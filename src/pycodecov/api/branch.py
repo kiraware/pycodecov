@@ -80,10 +80,10 @@ class Branch(API):
                     paginated_list.results,
                     paginated_list.total_pages,
                     parse_branch_data,
-                    self._token,
-                    self._session,
                     paginated_list.next,
                     paginated_list.previous,
+                    self._token,
+                    self._session,
                 )
 
             raise CodecovError(data)

@@ -1,9 +1,11 @@
 from dataclasses import dataclass
-from typing import Generic
+from typing import Generic, TypeVar
 
-from ..types import CodecovUrl, T
+from ..types import CodecovUrl
 
 __all__ = ["PaginatedList"]
+
+T = TypeVar("T")
 
 
 # FIXME

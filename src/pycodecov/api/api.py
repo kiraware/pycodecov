@@ -4,6 +4,8 @@ from typing import Self
 
 from aiohttp import ClientSession
 
+from ..types import CodecovApiToken
+
 __all__ = ["API"]
 
 
@@ -17,7 +19,7 @@ class API:
 
     def __init__(
         self,
-        token: str | None = None,
+        token: CodecovApiToken | None = None,
         session: ClientSession | None = None,
     ) -> None:
         headers = {
