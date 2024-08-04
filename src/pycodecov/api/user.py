@@ -126,7 +126,7 @@ class Owner(API, schemas.Owner):
                 return parse_paginated_list_api(
                     paginated_list,
                     parse_user_api,
-                    {"owner_username": self.username},
+                    owner_username=self.username,
                 )
 
             raise CodecovError(data)

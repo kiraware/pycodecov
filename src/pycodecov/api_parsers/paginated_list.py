@@ -9,7 +9,7 @@ __all__ = ["parse_paginated_list_api"]
 def parse_paginated_list_api(
     paginated_list: PaginatedList,
     api_parser: ApiParser,
-    payload: dict[str, Any],
+    **kwargs: Any,
 ) -> PaginatedListApi[TApi]:
     """
     Turn paginated list results into it's API form.
@@ -48,7 +48,7 @@ def parse_paginated_list_api(
     PaginatedList(...)
     """
     results = [
-        api_parser(result, paginated_list._token, paginated_list._session, **payload)
+        api_parser(result, paginated_list._token, paginated_list._session, **kwargs)
         for result in paginated_list
     ]
 
@@ -58,7 +58,7 @@ def parse_paginated_list_api(
         paginated_list.total_pages,
         paginated_list.parser,
         api_parser,
-        payload,
+        kwargs,
         paginated_list.next,
         paginated_list.previous,
         paginated_list._token,
