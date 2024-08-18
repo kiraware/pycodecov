@@ -1,12 +1,7 @@
 from dataclasses import dataclass
 from datetime import datetime
 
-from .commit import CommitDetail
-
-__all__ = [
-    "Branch",
-    "BranchDetail",
-]
+__all__ = ["Branch"]
 
 
 @dataclass(slots=True)
@@ -21,15 +16,3 @@ class Branch:
 
     name: str
     updatestamp: datetime
-
-
-@dataclass(slots=True)
-class BranchDetail(Branch):
-    """
-    A schema used to store info about branch detail.
-
-    Attributes:
-        head_commit: branch's current head commit.
-    """
-
-    head_commit: CommitDetail

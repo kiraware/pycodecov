@@ -1,39 +1,9 @@
 from dataclasses import dataclass
 
-from .line import Line
-from .total import ReportTotal
+from .base_report_file import BaseReportFile
+from .report_total import ReportTotal
 
-__all__ = [
-    "BaseReportFile",
-    "Report",
-    "ReportFile",
-]
-
-
-@dataclass(slots=True)
-class BaseReportFile:
-    """
-    A schema used to store info about base report file.
-
-    Attributes:
-        name: file path.
-        totals: coverage totals.
-    """
-
-    name: str
-    totals: ReportTotal
-
-
-@dataclass(slots=True)
-class ReportFile(BaseReportFile):
-    """
-    A schema used to store info about report file.
-
-    Attributes:
-        line_coverage: line-by-line coverage values.
-    """
-
-    line_coverage: list[Line]
+__all__ = ["Report"]
 
 
 @dataclass(slots=True)

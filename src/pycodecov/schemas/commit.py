@@ -1,33 +1,11 @@
 from dataclasses import dataclass
-from datetime import datetime
 
 from ..enums import CommitState
-from .report import Report
-from .total import CommitTotal
-from .user import GitAuthor, Owner
+from .base_commit import BaseCommit
+from .commit_total import CommitTotal
+from .owner import Owner
 
-__all__ = [
-    "BaseCommit",
-    "Commit",
-    "CommitDetail",
-    "GitCommit",
-]
-
-
-@dataclass(slots=True)
-class BaseCommit:
-    """
-    A schema used to store info about base commit.
-
-    Attributes:
-        commitid: commit SHA.
-        message: commit message.
-        timestamp: timestamp when commit was made.
-    """
-
-    commitid: str
-    message: str | None
-    timestamp: datetime
+__all__ = ["Commit"]
 
 
 @dataclass(slots=True)
@@ -50,27 +28,3 @@ class Commit(BaseCommit):
     totals: CommitTotal | None
     state: CommitState | None
     parent: str | None
-
-
-@dataclass(slots=True)
-class CommitDetail(Commit):
-    """
-    A schema used to store info about commit detail.
-
-    Attributes:
-        report: coverage report.
-    """
-
-    report: Report
-
-
-@dataclass(slots=True)
-class GitCommit(BaseCommit):
-    """
-    A schema used to store info about git commit.
-
-    Attributes:
-        author: commit author.
-    """
-
-    author: GitAuthor

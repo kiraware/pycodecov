@@ -2,13 +2,10 @@ from dataclasses import dataclass
 from datetime import datetime
 
 from ..enums import Language
-from .total import CommitTotal
-from .user import Owner
+from .commit_total import CommitTotal
+from .owner import Owner
 
-__all__ = [
-    "Repo",
-    "RepoConfig",
-]
+__all__ = ["Repo"]
 
 
 @dataclass(slots=True)
@@ -37,17 +34,3 @@ class Repo:
     active: bool | None
     activated: bool | None
     totals: CommitTotal | None
-
-
-@dataclass(slots=True)
-class RepoConfig:
-    """
-    A schema used to store info about repository config.
-
-    Attributes:
-        upload_token: token used for uploading coverage reports for repository.
-        graph_token: token used for repository graphs.
-    """
-
-    upload_token: str
-    graph_token: str
