@@ -2,39 +2,11 @@ from datetime import datetime
 from typing import Any
 
 from ..enums import Language
-from ..schemas import Repo, RepoConfig
-from .total import parse_commit_total_data
-from .user import parse_owner_data
+from ..schemas import Repo
+from .commit_total import parse_commit_total_data
+from .owner import parse_owner_data
 
-__all__ = [
-    "parse_repo_config_data",
-    "parse_repo_data",
-]
-
-
-def parse_repo_config_data(data: dict[str, Any]) -> RepoConfig:
-    """
-    Parse repo config data.
-
-    Args:
-        data: repo config json data.
-
-    Returns:
-        A `RepoConfig` schema.
-
-    Examples:
-    >>> data = {
-    ...     "upload_token": "string",
-    ...     "graph_token": "string",
-    ... }
-    >>> repo_config = parse_repo_config_data(data)
-    >>> repo_config
-    RepoConfig(upload_token='string', graph_token='string')
-    """
-    upload_token = data.get("upload_token")
-    graph_token = data.get("graph_token")
-
-    return RepoConfig(upload_token, graph_token)
+__all__ = ["parse_repo_data"]
 
 
 def parse_repo_data(data: dict[str, Any]) -> Repo:

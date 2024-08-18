@@ -1,69 +1,9 @@
 from typing import Any
 
-from ..enums import Service
-from ..schemas import GitAuthor, Owner, User
+from ..schemas import User
+from .owner import parse_owner_data
 
-__all__ = [
-    "parse_git_author_data",
-    "parse_owner_data",
-    "parse_user_data",
-]
-
-
-def parse_git_author_data(data: dict[str, Any]) -> GitAuthor:
-    """
-    Parse git author data.
-
-    Args:
-        data: git author json data.
-
-    Returns:
-        A `GitAuthor` schema.
-
-    Examples:
-    >>> data = {
-    ...     "id": 123,
-    ...     "username": "string",
-    ...     "name": "string",
-    ...     "email": "string",
-    ... }
-    >>> git_author = parse_git_author_data(data)
-    >>> git_author
-    GitAuthor(id=123, username='string', name='string', email='string')
-    """
-    id = data.get("id")
-    username = data.get("username")
-    name = data.get("name")
-    email = data.get("email")
-
-    return GitAuthor(id, username, name, email)
-
-
-def parse_owner_data(data: dict[str, Any]) -> Owner:
-    """
-    Parse owner data.
-
-    Args:
-        data: owner json data.
-
-    Returns:
-        An `Owner` schema.
-
-    Examples:
-    >>> data = {
-    ...     "service": "github",
-    ...     "username": "string",
-    ...     "name": "string",
-    ... }
-    >>> owner = parse_owner_data(data)
-    >>> owner
-    Owner(service=<Service.GITHUB: 'github'>, username='string', name='string')
-    """
-    service = data.get("service")
-    username = data.get("username")
-    name = data.get("name")
-
-    return Owner(Service(service), username, name)
+__all__ = ["parse_user_data"]
 
 
 def parse_user_data(data: dict[str, Any]) -> User:

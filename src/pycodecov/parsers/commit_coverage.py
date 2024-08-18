@@ -1,21 +1,20 @@
 from typing import Any
 
-from ..schemas import Report
-from .base_report import parse_base_report_file_data
+from ..schemas import CommitCoverage
 from .report_total import parse_report_total_data
 
-__all__ = ["parse_report_data"]
+__all__ = ["parse_commit_coverage_data"]
 
 
-def parse_report_data(data: dict[str, Any]) -> Report:
+def parse_commit_coverage_data(data: dict[str, Any]) -> CommitCoverage:
     """
-    Parse report data.
+    Parse commit coverage data.
 
     Args:
-        data: report json data.
+        data: commit coverage json data.
 
     Returns:
-        A `Report` schema.
+        A `CommitCoverage` schema.
 
     Examples:
     >>> data = {
@@ -28,23 +27,18 @@ def parse_report_data(data: dict[str, Any]) -> Report:
     ...         "coverage": 12.3,
     ...         "branches": 123,
     ...         "methods": 123,
-    ...         "messages": 123,
     ...         "sessions": 123,
     ...         "complexity": 12.3,
     ...         "complexity_total": 12.3,
     ...         "complexity_ratio": 12.3,
-    ...         "diff": 123,
     ...     },
-    ...     "files": [],
+    ...     "commit_file_url": "string",
     ... }
-    >>> report = parse_report_data(data)
-    >>> report
-    Report(totals=ReportTotal(...), files=[])
+    >>> commit_coverage = parse_commit_coverage_data(data)
+    >>> commit_coverage
+    CommitCoverage(totals=CommitTotal(...), commit_file_url='string')
     """
     totals = data.get("totals")
-    files = data.get("files")
+    commit_file_url = data.get("commit_file_url")
 
-    return Report(
-        parse_report_total_data(totals),
-        [parse_base_report_file_data(file) for file in files],
-    )
+    return CommitCoverage(parse_report_total_data(totals), commit_file_url)
