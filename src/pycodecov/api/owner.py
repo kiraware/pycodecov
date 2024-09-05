@@ -1,16 +1,20 @@
+from typing import Any
+
 from aiohttp import ClientSession
 
 from .. import schemas
-from ..api_parsers import parse_paginated_list_api, parse_user_api
 from ..enums import Service
 from ..exceptions import CodecovError
 from ..parsers import parse_owner_data, parse_paginated_list_data, parse_user_data
 from ..types import CodecovApiToken
 from .api import API
-from .paginated_list import PaginatedList, PaginatedListApi
-from .user import User
+from .paginated_list import PaginatedList, PaginatedListApi, parse_paginated_list_api
+from .user import User, parse_user_api
 
-__all__ = ["Owner"]
+__all__ = [
+    "Owner", 
+    "parse_owner_api",
+]
 
 
 class Owner(API, schemas.Owner):
@@ -128,3 +132,35 @@ class Owner(API, schemas.Owner):
                 )
 
             raise CodecovError(data)
+
+
+def parse_owner_api(
+    schema: schemas.Owner,
+    token: CodecovApiToken | None = None,
+    session: ClientSession | None = None,
+    **kwargs: Any,
+) -> Owner:
+    """
+    Turn Owner schema into Owner API.
+
+    Args:
+        schema: owner data.
+        token: Codecov API Token.
+        session: client session.
+
+    Returns:
+        An `Owner` API.
+
+    Examples:
+    >>> from pycodecov.parsers import parse_owner_data
+    >>> data = {
+    ...     "service": "github",
+    ...     "username": "string",
+    ...     "name": "string",
+    ... }
+    >>> owner = parse_owner_data(data)
+    >>> owner_api = parse_owner_api(owner)
+    >>> owner_api
+    Owner(service=<Service.GITHUB: 'github'>, username='string', name='string')
+    """
+    return Owner(schema.service, schema.username, schema.name, token, session)

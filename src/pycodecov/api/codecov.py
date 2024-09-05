@@ -1,13 +1,12 @@
 from aiohttp import ClientSession
 
-from ..api_parsers import parse_owner_api, parse_paginated_list_api
 from ..enums import Service
 from ..exceptions import CodecovError
 from ..parsers import parse_owner_data, parse_paginated_list_data
 from ..types import CodecovApiToken
 from .api import API
-from .paginated_list import PaginatedList, PaginatedListApi
-from .user import Owner
+from .owner import Owner, parse_owner_api
+from .paginated_list import PaginatedList, PaginatedListApi, parse_paginated_list_api
 
 __all__ = ["Codecov"]
 
