@@ -3,8 +3,8 @@ from typing import Any
 
 from ..enums import PullState
 from ..schemas import Pull
-from .total import parse_commit_total_data
-from .user import parse_owner_data
+from .commit_total import parse_commit_total_data
+from .owner import parse_owner_data
 
 __all__ = ["parse_pull_data"]
 
