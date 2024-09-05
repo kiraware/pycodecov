@@ -55,10 +55,10 @@ class Repo(API):
         """
         params = {}
         optional_params = {
-            "active": active,
+            "active": str(active).lower() if active is not None else active,
             "names": names,
-            "page": page,
-            "page_size": page_size,
+            "page": str(page) if page is not None else page,
+            "page_size": str(page_size) if page_size is not None else page_size,
             "search": search,
         }
 

@@ -52,8 +52,8 @@ class Codecov(API):
         """  # noqa: E501
         params = {}
         optional_params = {
-            "page": page,
-            "page_size": page_size,
+            "page": str(page) if page is not None else page,
+            "page_size": str(page_size) if page_size is not None else page_size,
         }
 
         params.update({k: v for k, v in optional_params.items() if v is not None})

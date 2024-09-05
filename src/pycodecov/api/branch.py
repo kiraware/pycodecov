@@ -58,10 +58,10 @@ class Branch(API):
         """
         params = {}
         optional_params = {
-            "author": author,
+            "author": str(author).lower() if author is not None else author,
             "ordering": ordering,
-            "page": page,
-            "page_size": page_size,
+            "page": str(page) if page is not None else page,
+            "page_size": str(page_size) if page_size is not None else page_size,
         }
 
         params.update({k: v for k, v in optional_params.items() if v is not None})

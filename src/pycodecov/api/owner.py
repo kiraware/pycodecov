@@ -12,7 +12,7 @@ from .paginated_list import PaginatedList, PaginatedListApi, parse_paginated_lis
 from .user import User, parse_user_api
 
 __all__ = [
-    "Owner", 
+    "Owner",
     "parse_owner_api",
 ]
 
@@ -98,10 +98,10 @@ class Owner(API, schemas.Owner):
         """  # noqa: E501
         params = {}
         optional_params = {
-            "activated": activated,
-            "is_admin": is_admin,
-            "page": page,
-            "page_size": page_size,
+            "activated": str(activated).lower() if activated is not None else activated,
+            "is_admin": str(is_admin).lower() if is_admin is not None else is_admin,
+            "page": str(page) if page is not None else page,
+            "page_size": str(page_size) if page_size is not None else page_size,
             "search": search,
         }
 
