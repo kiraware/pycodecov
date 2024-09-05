@@ -1,17 +1,12 @@
 from dataclasses import dataclass
-from typing import Generic, TypeVar
 
 from ..types import CodecovUrl
 
 __all__ = ["PaginatedList"]
 
-T = TypeVar("T")
 
-
-# FIXME
-# Update generic type syntax according to PEP 695 when mypy supports it.
 @dataclass(slots=True)
-class PaginatedList(Generic[T]):
+class PaginatedList[T]:
     """
     A schema used to store info about paginated list.
 
