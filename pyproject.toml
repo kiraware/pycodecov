@@ -75,11 +75,14 @@ skips = ["*_test.py", "*test_*.py"]
 [tool.mypy]
 files = ["src", "tests"]
 strict_optional = false
+# FIXME
+# Remove this when mypy fully support PEP 695
+enable_incomplete_feature = ["NewGenericSyntax"]
 
 [tool.ruff]
 exclude = [".venv", ".git", "__pycache__", "build", "dist", "venv"]
 line-length = 88
-target-version = "py311"
+target-version = "py312"
 src = ["src", "tests"]
 
 [tool.ruff.lint]

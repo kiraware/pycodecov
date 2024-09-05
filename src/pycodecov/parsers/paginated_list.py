@@ -1,12 +1,11 @@
 from typing import Any, Callable
 
 from ..schemas import PaginatedList
-from ..types import T
 
 __all__ = ["parse_paginated_list_data"]
 
 
-def parse_paginated_list_data(
+def parse_paginated_list_data[T](
     data: dict[str, Any], parser: Callable[[dict[str, Any]], T]
 ) -> PaginatedList[T]:
     """

@@ -5,7 +5,7 @@ from aiohttp import ClientSession
 from .. import schemas
 from ..exceptions import CodecovError
 from ..parsers import parse_paginated_list_data
-from ..types import ApiParser, CodecovApiToken, CodecovUrl, T, TApi
+from ..types import ApiParser, CodecovApiToken, CodecovUrl
 from .api import API
 
 __all__ = [
@@ -15,7 +15,7 @@ __all__ = [
 ]
 
 
-class PaginatedList(API, schemas.PaginatedList[T]):
+class PaginatedList[T](API, schemas.PaginatedList[T]):
     """
     Paginated list API Wrapper from Codecov API.
     """
@@ -69,7 +69,7 @@ class PaginatedList(API, schemas.PaginatedList[T]):
         return await self._get_next_or_previous(self.previous)
 
 
-class PaginatedListApi(API, schemas.PaginatedList[TApi]):
+class PaginatedListApi[T](API, schemas.PaginatedList[T]):
     """
     Paginated list API Wrapper from Codecov API.
     """
@@ -77,9 +77,9 @@ class PaginatedListApi(API, schemas.PaginatedList[TApi]):
     def __init__(
         self,
         count: int,
-        results: list[TApi],
+        results: list[T],
         total_pages: int,
-        parser: Callable[[dict[str, Any]], T],
+        parser: Callable[[dict[str, Any]], Any],
         api_parser: ApiParser,
         payload: dict[str, Any],
         next: CodecovUrl | None = None,
@@ -97,7 +97,7 @@ class PaginatedListApi(API, schemas.PaginatedList[TApi]):
 
     async def _get_next_or_previous(
         self, next_or_previous: str | None
-    ) -> "PaginatedListApi[TApi] | None":
+    ) -> "PaginatedListApi[T] | None":
         if next_or_previous is not None:
             async with self._session.get(next_or_previous) as response:
                 data = await response.json()
@@ -124,18 +124,18 @@ class PaginatedListApi(API, schemas.PaginatedList[TApi]):
 
         return None
 
-    async def get_next(self) -> "PaginatedListApi[TApi] | None":
+    async def get_next(self) -> "PaginatedListApi[T] | None":
         return await self._get_next_or_previous(self.next)
 
-    async def get_previous(self) -> "PaginatedListApi[TApi] | None":
+    async def get_previous(self) -> "PaginatedListApi[T] | None":
         return await self._get_next_or_previous(self.previous)
 
 
-def parse_paginated_list_api(
+def parse_paginated_list_api[T](
     paginated_list: PaginatedList,
     api_parser: ApiParser,
     **kwargs: Any,
-) -> PaginatedListApi[TApi]:
+) -> PaginatedListApi[T]:
     """
     Turn paginated list results into it's API form.
 

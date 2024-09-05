@@ -1,4 +1,4 @@
-from typing import Any, Protocol, TypeVar
+from typing import Any, Protocol
 
 from aiohttp import ClientSession
 
@@ -6,16 +6,11 @@ __all__ = [
     "ApiParser",
     "CodecovApiToken",
     "CodecovUrl",
-    "T",
-    "TApi",
 ]
 
 
 CodecovApiToken = str
 CodecovUrl = str
-
-T = TypeVar("T")
-TApi = TypeVar("TApi")
 
 
 class ApiParser(Protocol):
