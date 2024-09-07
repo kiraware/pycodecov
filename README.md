@@ -37,12 +37,13 @@ import asyncio
 import os
 
 from pycodecov import Codecov
+from pycodecov.enums import Service
 
 CODECOV_API_TOKEN = os.environ["CODECOV_API_TOKEN"]
 
 async def main():
     async with Codecov(CODECOV_API_TOKEN) as codecov:
-        service_owners = await codecov.get_service_owners()
+        service_owners = await codecov.get_service_owners(Service.GITHUB)
         print(service_owners)
 
 asyncio.run(main())

@@ -1,14 +1,12 @@
-# Tutorial
-
-## Codecov API
+# User API
 
 There is one API available for codecov named get_service_owners.
 
-### get_service_owners
+## get_service_owners
 
 get_service_owners is used to get a paginated list of owners
 to which the currently authenticated user has access. Read
-[get_service_owners reference](reference/api.md/#pycodecov.api.Codecov.get_service_owners)
+[get_service_owners reference](../reference/api.md#pycodecov.api.Codecov.get_service_owners)
 for more details.
 
 !!! example

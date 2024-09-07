@@ -24,7 +24,7 @@ theme:
     - search.suggest
     - search.highlight
     - search.share
-  logo: images/logo.png
+  logo: images/logo.svg
   name: "material"
   palette:
     # Palette toggle for automatic mode
@@ -32,7 +32,7 @@ theme:
       toggle:
         icon: material/brightness-auto
         name: Switch to light mode
-      primary: yellow
+      primary: pink
 
     # Palette toggle for light mode
     - media: "(prefers-color-scheme: light)"
@@ -40,7 +40,7 @@ theme:
       toggle:
         icon: material/brightness-7
         name: Switch to dark mode
-      primary: yellow
+      primary: pink
 
     # Palette toggle for dark mode
     - media: "(prefers-color-scheme: dark)"
@@ -48,14 +48,14 @@ theme:
       toggle:
         icon: material/brightness-4
         name: Switch to system preference
-      primary: yellow
+      primary: pink
 
 nav:
   - Home: index.md
   - Tutorial:
-      - index.md
-      - codecov.md
-      - user.md
+      - Getting Started: tutorial/index.md
+      - tutorial/codecov.md
+      - tutorial/user.md
   - How-To Guides: how-to-guides.md
   - Reference:
       - API: reference/api.md

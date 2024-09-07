@@ -42,7 +42,7 @@ CODECOV_API_TOKEN = os.environ["CODECOV_API_TOKEN"]
 
 async def main():
     async with Codecov(CODECOV_API_TOKEN) as codecov:
-        service_owners = await codecov.get_service_owners()
+        service_owners = await codecov.get_service_owners(Service.GITHUB)
         print(service_owners)
 
 asyncio.run(main())
@@ -53,7 +53,7 @@ asyncio.run(main())
 You can start reading the documentation with the
 following links:
 
-1. [Tutorials](tutorials.md)
+1. [Tutorials](tutorial/index.md)
 2. [How-To Guides](how-to-guides.md)
 3. [Reference](reference/api.md)
 
