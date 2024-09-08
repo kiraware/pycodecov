@@ -25,13 +25,13 @@ class Owner(API, schemas.Owner):
     def __init__(
         self,
         service: Service,
-        username: str | None = None,
+        owner_username: str,
         name: str | None = None,
         token: CodecovApiToken | None = None,
         session: ClientSession | None = None,
     ) -> None:
         API.__init__(self, token, session)
-        schemas.Owner.__init__(self, service, username, name)
+        schemas.Owner.__init__(self, service, owner_username, name)
 
     async def get_detail(self) -> schemas.Owner:
         """
@@ -47,8 +47,8 @@ class Owner(API, schemas.Owner):
             >>> async def main():
             ...     async with Codecov() as codecov:
             ...         service_owners = await codecov.get_service_owners(Service.GITHUB)
-            ...         for owner in service_owners:
-            ...             print(await owner.get_detail())
+            ...         for service_owner in service_owners:
+            ...             print(await service_owner.get_detail())
             >>> asyncio.run(main())
             Owner(service=<Service.GITHUB: 'github'>, username='jazzband', name='jazzband')
         """  # noqa: E501
@@ -91,8 +91,8 @@ class Owner(API, schemas.Owner):
             >>> async def main():
             ...     async with Codecov(os.environ["CODECOV_API_TOKEN"]) as codecov:
             ...         service_owners = await codecov.get_service_owners(Service.GITHUB)
-            ...         for owner in service_owners:
-            ...             print(await owner.get_users())
+            ...         for service_owner in service_owners:
+            ...             print(await service_owner.get_users())
             >>> asyncio.run(main())
             PaginatedList(...)
         """  # noqa: E501
@@ -108,7 +108,7 @@ class Owner(API, schemas.Owner):
         params.update({k: v for k, v in optional_params.items() if v is not None})
 
         async with self._session.get(
-            f"{self.api_url}/{self.service}/{self.username}/users/", params=params
+            f"{self.api_url}/{self.service}/{self.username}/users", params=params
         ) as response:
             data = await response.json()
 

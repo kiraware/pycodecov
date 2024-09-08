@@ -48,7 +48,7 @@ class Codecov(API):
             ...         service_owners = await codecov.get_service_owners(Service.GITHUB)
             ...         print(service_owners)
             >>> asyncio.run(main())
-            PaginatedList(...)
+            PaginatedListApi(...)
         """  # noqa: E501
         params = {}
         optional_params = {

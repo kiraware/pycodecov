@@ -34,3 +34,18 @@ for more details.
     ```console
     PaginatedListApi(count=2, next=None, previous=None, results=[Owner(service=<Service.GITHUB: 'github'>, username='jazzband', name='jazzband'), Owner(service=<Service.GITHUB: 'github'>, username='kiraware', name=None)], total_pages=1)
     ```
+
+    If you want to use pagination, you can pass `page` and `page_size` parameters
+    to get_service_owners.
+
+    ```python
+    ...
+    service_owners = await codecov.get_service_owners(Service.GITHUB, 1, 1)
+    ...
+    ```
+
+    Output:
+
+    ```console
+    PaginatedListApi(count=2, next='/api/v2/github/?page=2&page_size=1', previous=None, results=[Owner(service=<Service.GITHUB: 'github'>, username='jazzband', name='jazzband')], total_pages=2)
+    ```
