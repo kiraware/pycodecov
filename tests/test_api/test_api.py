@@ -19,9 +19,11 @@ async def test_api():
 
 
 async def test_api_with_supplied_session():
-    async with API(CODECOV_API_TOKEN, ClientSession("https://test.com")) as api:
+    session = ClientSession("https://test.com")
+    async with API(CODECOV_API_TOKEN, session) as api:
         assert api._token == CODECOV_API_TOKEN
         assert isinstance(api._session, ClientSession)
+        assert api._session == session
         assert str(api._session._base_url) == "https://test.com"
 
 

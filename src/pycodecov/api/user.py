@@ -23,8 +23,8 @@ class User(API, schemas.User):
     def __init__(
         self,
         service: Service,
-        owner_username: str | None = None,
-        username: str | None = None,
+        owner_username: str,
+        user_username_or_ownerid: str,
         name: str | None = None,
         activated: bool | None = None,
         is_admin: bool | None = None,
@@ -33,7 +33,9 @@ class User(API, schemas.User):
         session: ClientSession | None = None,
     ) -> None:
         API.__init__(self, token, session)
-        schemas.User.__init__(self, service, username, name, activated, is_admin, email)
+        schemas.User.__init__(
+            self, service, user_username_or_ownerid, name, activated, is_admin, email
+        )
 
         self.owner_username = owner_username
 
@@ -52,10 +54,10 @@ class User(API, schemas.User):
             >>> async def main():
             ...     async with Codecov(os.environ["CODECOV_API_TOKEN"]) as codecov:
             ...         service_owners = await codecov.get_service_owners(Service.GITHUB)
-            ...         for owner in service_owners:
-            ...             users = await owner.get_users()
+            ...         for service_owner in service_owners:
+            ...             users = await service_owner.get_users()
             ...             for user in users:
-            ...                 print(user)
+            ...                 print(await user.get_detail())
             >>> asyncio.run(main())
             User(...)
             ...
@@ -99,7 +101,7 @@ def parse_user_api(
     ...     "email": "string",
     ... }
     >>> user = parse_user_data(data)
-    >>> user_api = parse_user_api(user)
+    >>> user_api = parse_user_api(user, owner_username="string")
     >>> user_api
     User(service=<Service.GITHUB: 'github'>, username='string', name='string', activated=True, is_admin=True, email='string')
     """  # noqa: E501

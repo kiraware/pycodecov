@@ -42,15 +42,17 @@ class Owner(API, schemas.Owner):
 
         Examples:
             >>> import asyncio
+            >>> import os
             >>> from pycodecov import Codecov
             >>> from pycodecov.enums import Service
             >>> async def main():
-            ...     async with Codecov() as codecov:
+            ...     async with Codecov(os.environ["CODECOV_API_TOKEN"]) as codecov:
             ...         service_owners = await codecov.get_service_owners(Service.GITHUB)
             ...         for service_owner in service_owners:
             ...             print(await service_owner.get_detail())
             >>> asyncio.run(main())
-            Owner(service=<Service.GITHUB: 'github'>, username='jazzband', name='jazzband')
+            Owner(...)
+            ...
         """  # noqa: E501
         async with self._session.get(
             f"{self.api_url}/{self.service}/{self.username}"
@@ -94,7 +96,7 @@ class Owner(API, schemas.Owner):
             ...         for service_owner in service_owners:
             ...             print(await service_owner.get_users())
             >>> asyncio.run(main())
-            PaginatedList(...)
+            PaginatedListApi(...)
         """  # noqa: E501
         params = {}
         optional_params = {

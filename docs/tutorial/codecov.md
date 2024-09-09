@@ -1,6 +1,6 @@
 # Codecov API
 
-There is one API available for codecov named get_service_owners.
+There is one API available for Codecov API named get_service_owners.
 
 ## get_service_owners
 

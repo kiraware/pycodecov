@@ -148,7 +148,7 @@ def parse_paginated_list_api[T](
 
     Examples:
     >>> from pycodecov.api import PaginatedList
-    >>> from pycodecov.api_parsers import parse_owner_api
+    >>> from pycodecov.api.owner import parse_owner_api
     >>> from pycodecov.parsers import parse_owner_data
     >>> data = {
     ...     "count": 123,
