@@ -91,18 +91,20 @@ def parse_user_api(
         An `User` API.
 
     Examples:
-    >>> from pycodecov.parsers import parse_user_data
-    >>> data = {
-    ...     "service": "github",
-    ...     "username": "string",
-    ...     "name": "string",
-    ...     "activated": True,
-    ...     "is_admin": True,
-    ...     "email": "string",
-    ... }
-    >>> user = parse_user_data(data)
-    >>> user_api = parse_user_api(user, owner_username="string")
-    >>> user_api
+    >>> import asyncio
+    >>> async def main():
+    ...     data = {
+    ...         "service": "github",
+    ...         "username": "string",
+    ...         "name": "string",
+    ...         "activated": True,
+    ...         "is_admin": True,
+    ...         "email": "string",
+    ...     }
+    ...     user = parse_user_data(data)
+    ...     user_api = parse_user_api(user, owner_username="string")
+    ...     print(user_api)
+    >>> asyncio.run(main())
     User(service=<Service.GITHUB: 'github'>, username='string', name='string', activated=True, is_admin=True, email='string')
     """  # noqa: E501
     return User(

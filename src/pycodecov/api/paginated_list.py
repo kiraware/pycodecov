@@ -147,30 +147,27 @@ def parse_paginated_list_api[T](
         A `PaginatedListApi`.
 
     Examples:
+    >>> import asyncio
     >>> from pycodecov.api import PaginatedList
     >>> from pycodecov.api.owner import parse_owner_api
+    >>> from pycodecov.enums import Service
     >>> from pycodecov.parsers import parse_owner_data
-    >>> data = {
-    ...     "count": 123,
-    ...     "next": "http://api.codecov.io/api/v2/github/?page=4",
-    ...     "previous": "http://api.codecov.io/api/v2/github/?page=2",
-    ...     "results": [
-    ...         {"service": "github", "username": "string", "name": "string"},
-    ...     ],
-    ...     "total_pages": 7,
-    ... }
-    >>> paginated_list_data = parse_paginated_list_data(data, parse_owner_data)
-    >>> paginated_list = PaginatedList(
-    ...     paginated_list_data.count,
-    ...     paginated_list_data.results,
-    ...     paginated_list_data.total_pages,
-    ...     parse_owner_data,
-    ...     paginated_list_data.next,
-    ...     paginated_list_data.previous,
-    >>> )
-    >>> paginated_list_api = parse_paginated_list_api(paginated_list, parse_owner_api)
-    >>> paginated_list_api
-    PaginatedList(...)
+    >>> from pycodecov.schemas import Owner
+    >>> async def main():
+    ...     paginated_list = PaginatedList(
+    ...         123,
+    ...         [Owner(Service.GITHUB, "string", "string")],
+    ...         7,
+    ...         parse_owner_data,
+    ...         "http://api.codecov.io/api/v2/github/?page=4",
+    ...         "http://api.codecov.io/api/v2/github/?page=2",
+    ...     )
+    ...     paginated_list_api = parse_paginated_list_api(
+    ...         paginated_list, parse_owner_api
+    ...     )
+    ...     print(paginated_list_api)
+    >>> asyncio.run(main())
+    PaginatedListApi(...)
     """
     results = [
         api_parser(result, paginated_list._token, paginated_list._session, **kwargs)

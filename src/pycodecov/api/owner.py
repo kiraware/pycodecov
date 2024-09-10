@@ -154,15 +154,17 @@ def parse_owner_api(
         An `Owner` API.
 
     Examples:
-    >>> from pycodecov.parsers import parse_owner_data
-    >>> data = {
-    ...     "service": "github",
-    ...     "username": "string",
-    ...     "name": "string",
-    ... }
-    >>> owner = parse_owner_data(data)
-    >>> owner_api = parse_owner_api(owner)
-    >>> owner_api
+    >>> import asyncio
+    >>> async def main():
+    ...     data = {
+    ...         "service": "github",
+    ...         "username": "string",
+    ...         "name": "string",
+    ...     }
+    ...     owner = parse_owner_data(data)
+    ...     owner_api = parse_owner_api(owner)
+    ...     print(owner_api)
+    >>> asyncio.run(main())
     Owner(service=<Service.GITHUB: 'github'>, username='string', name='string')
     """
     return Owner(schema.service, schema.username, schema.name, token, session)
