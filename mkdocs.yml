@@ -1,0 +1,76 @@
+site_name: pycodecov
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            show_source: false
+            show_root_heading: true
+            show_symbol_type_heading: true
+            show_symbol_type_toc: true
+          paths: [src]
+
+theme:
+  favicon: images/favicon.ico
+  features:
+    - content.code.copy
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - search.suggest
+    - search.highlight
+    - search.share
+  logo: images/logo.svg
+  name: "material"
+  palette:
+    # Palette toggle for automatic mode
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+      primary: pink
+
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+      primary: pink
+
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
+      primary: pink
+
+nav:
+  - Home: index.md
+  - Tutorial:
+      - Getting Started: tutorial/index.md
+      - tutorial/codecov.md
+      - tutorial/user.md
+  - How-To Guides: how-to-guides.md
+  - Reference:
+      - API: reference/api.md
+      - reference/exception.md
+      - reference/schema.md
+      - reference/enum.md
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+
+repo_url: https://github.com/kiraware/pycodecov
+repo_name: kiraware/pycodecov
