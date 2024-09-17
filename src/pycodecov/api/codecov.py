@@ -49,7 +49,7 @@ class Codecov(API):
             ...         print(service_owners)
             >>> asyncio.run(main())
             PaginatedListApi(...)
-        """  # noqa: E501
+        """
         params = {}
         optional_params = {
             "page": str(page) if page is not None else page,

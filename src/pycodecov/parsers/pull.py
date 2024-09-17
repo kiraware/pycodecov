@@ -59,7 +59,7 @@ def parse_pull_data(data: dict[str, Any]) -> Pull:
     >>> pull = parse_pull_data(data)
     >>> pull
     Pull(pullid=123, title='string', base_total=CommitTotal(...), head_total=CommitTotal(...), updatestamp=datetime.datetime(...), state=<PullState.OPEN: 'open'>, ci_passed=True, author=None)
-    """  # noqa: E501
+    """
     pullid = data.get("pullid")
     title = data.get("title")
     base_total = data.get("base_total")

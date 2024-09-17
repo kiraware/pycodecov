@@ -34,7 +34,7 @@ def parse_commit_data(data: dict[str, Any]) -> Commit:
     >>> commit = parse_commit_data(data)
     >>> commit
     Commit(commitid='string', message='string', timestamp=datetime.datetime(...), ci_passed=True, author=None, branch='string', totals=None, state=None, parent='string')
-    """  # noqa: E501
+    """
     base_commit = parse_base_commit_data(data)
 
     commitid = base_commit.commitid

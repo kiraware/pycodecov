@@ -34,7 +34,7 @@ def parse_repo_data(data: dict[str, Any]) -> Repo:
     >>> repo = parse_repo_data(data)
     >>> repo
     Repo(name='string', private=True, updatestamp=datetime.datetime(...), author=Owner(...), language='string', branch='string', active=True, activated=True, totals=None)
-    """  # noqa: E501
+    """
     name = data.get("name")
     private = data.get("private")
     updatestamp = data.get("updatestamp")

@@ -69,7 +69,7 @@ def parse_commit_comparison_data(data: dict[str, Any]) -> CommitComparison:
     >>> commit_comparison = parse_commit_comparison_data(data)
     >>> commit_comparison
     CommitComparison(base_commit='string', head_commit='string', totals=TotalComparison(...), commit_uploads=[], diff=DiffComparison(...), files=[], untracked=[], has_unmerged_base_commits=False)
-    """  # noqa: E501
+    """
     base_commit = data.get("base_commit")
     head_commit = data.get("head_commit")
     totals = data.get("totals")

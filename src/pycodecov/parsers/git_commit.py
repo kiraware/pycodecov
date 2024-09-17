@@ -32,7 +32,7 @@ def parse_git_commit_data(data: dict[str, Any]) -> GitCommit:
     >>> git_commit = parse_git_commit_data(data)
     >>> git_commit
     GitCommit(commitid='string', message='string', timestamp=datetime.datetime(...), author=GitAuthor(...))
-    """  # noqa: E501
+    """
     base_commit = parse_base_commit_data(data)
 
     commitid = base_commit.commitid

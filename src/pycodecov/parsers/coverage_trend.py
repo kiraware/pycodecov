@@ -26,7 +26,7 @@ def parse_coverage_trend_data(data: dict[str, Any]) -> CoverageTrend:
     >>> coverage_trend = parse_coverage_trend_data(data)
     >>> coverage_trend
     CoverageTrend(timestamp=datetime.datetime(...), min=12.3, max=12.3, avg=12.3)
-    """  # noqa: E501
+    """
     timestamp = data.get("timestamp")
     min = data.get("min")
     max = data.get("max")
