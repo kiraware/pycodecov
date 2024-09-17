@@ -71,7 +71,7 @@ def parse_commit_detail_data(data: dict[str, Any]) -> CommitDetail:
     >>> commit_detail = parse_commit_detail_data(data)
     >>> commit_detail
     CommitDetail(commitid='string', message='string', timestamp=datetime.datetime(...), ci_passed=True, author=None, branch='string', totals=None, state=None, parent='string', report=Report(...))
-    """  # noqa: E501
+    """
     commit = parse_commit_data(data)
 
     commitid = commit.commitid

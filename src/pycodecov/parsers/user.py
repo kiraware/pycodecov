@@ -28,7 +28,7 @@ def parse_user_data(data: dict[str, Any]) -> User:
     >>> user = parse_user_data(data)
     >>> user
     User(service=<Service.GITHUB: 'github'>, username='string', name='string', activated=True, is_admin=True, email='string')
-    """  # noqa: E501
+    """
     owner = parse_owner_data(data)
 
     service = owner.service

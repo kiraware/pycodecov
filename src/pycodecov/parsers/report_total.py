@@ -36,7 +36,7 @@ def parse_report_total_data(data: dict[str, Any]) -> ReportTotal:
     >>> report_total = parse_report_total_data(data)
     >>> report_total
     ReportTotal(files=123, lines=123, hits=123, misses=123, partials=123, coverage=12.3, branches=123, methods=123, messages=123, sessions=123, complexity=12.3, complexity_total=12.3, complexity_ratio=12.3, diff=123)
-    """  # noqa: E501
+    """
     base_total = parse_base_total_data(data)
 
     files = base_total.files

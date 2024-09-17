@@ -36,7 +36,7 @@ def parse_line_comparison_data(data: dict[str, Any]) -> LineComparison:
     >>> line_comparison = parse_line_comparison_data(data)
     >>> line_comparison
     LineComparison(value='string', number=LineNumberComparison(...), coverage=LineCoverageComparison(...), is_diff=True, added=True, removed=False, sessions=0)
-    """  # noqa: E501
+    """
     value = data.get("value")
     number = data.get("number")
     coverage = data.get("coverage")

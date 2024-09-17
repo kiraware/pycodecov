@@ -62,7 +62,7 @@ class Owner(API, schemas.Owner):
             >>> asyncio.run(main())
             Owner(...)
             ...
-        """  # noqa: E501
+        """
         async with self._session.get(
             f"{self.api_url}/{self.service}/{self.owner_username}"
         ) as response:
@@ -106,7 +106,7 @@ class Owner(API, schemas.Owner):
             ...             print(await service_owner.get_users())
             >>> asyncio.run(main())
             PaginatedListApi(...)
-        """  # noqa: E501
+        """
         params = {}
         optional_params = {
             "activated": str(activated).lower() if activated is not None else activated,

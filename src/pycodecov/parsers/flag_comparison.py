@@ -56,7 +56,7 @@ def parse_flag_comparison_data(data: dict[str, Any]) -> FlagComparison:
     >>> flag_comparison = parse_flag_comparison_data(data)
     >>> flag_comparison
     FlagComparison(name='string', base_report_totals=ReportTotal(...), head_report_totals=ReportTotal(...), diff_totals=None)
-    """  # noqa: E501
+    """
     name = data.get("name")
     base_report_totals = data.get("base_report_totals")
     head_report_totals = data.get("head_report_totals")

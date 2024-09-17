@@ -63,7 +63,7 @@ class User(API, schemas.User):
             >>> asyncio.run(main())
             User(...)
             ...
-        """  # noqa: E501
+        """
         async with self._session.get(
             f"{self.api_url}/{self.service}/{self.owner_username}/users/{self.user_username_or_ownerid}"
         ) as response:
@@ -110,7 +110,7 @@ def parse_user_api(
     ...     print(user_api)
     >>> asyncio.run(main())
     User(service=<Service.GITHUB: 'github'>, username='string', name='string', activated=True, is_admin=True, email='string')
-    """  # noqa: E501
+    """
     return User(
         kwargs["service"],
         kwargs["owner_username"],

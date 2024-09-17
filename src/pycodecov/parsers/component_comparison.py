@@ -57,7 +57,7 @@ def parse_component_comparison_data(data: dict[str, Any]) -> ComponentComparison
     >>> component_comparison = parse_component_comparison_data(data)
     >>> component_comparison
     ComponentComparison(component_id='string', name='string', base_report_totals=ReportTotal(...), head_report_totals=ReportTotal(...), diff_totals=None)
-    """  # noqa: E501
+    """
     component_id = data.get("component_id")
     name = data.get("name")
     base_report_totals = data.get("base_report_totals")
