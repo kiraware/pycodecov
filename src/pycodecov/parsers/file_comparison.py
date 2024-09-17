@@ -69,7 +69,7 @@ def parse_file_comparison_data(data: dict[str, Any]) -> FileComparison:
     >>> file_comparison = parse_file_comparison_data(data)
     >>> file_comparison
     FileComparison(name=FileNameComparison(...), totals=TotalComparison(...), has_diff=True, stats=None, change_summary=None, lines=[])
-    """  # noqa: E501
+    """
     name = data.get("name")
     totals = data.get("totals")
     has_diff = data.get("has_diff")

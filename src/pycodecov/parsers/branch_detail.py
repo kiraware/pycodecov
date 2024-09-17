@@ -89,7 +89,7 @@ def parse_branch_detail_data(data: dict[str, Any]) -> BranchDetail:
     >>> branch_detail = parse_branch_detail_data(data)
     >>> branch_detail
     BranchDetail(name='string', updatestamp=datetime.datetime(...), head_commit=CommitDetail(...))
-    """  # noqa: E501
+    """
     branch = parse_branch_data(data)
 
     name = branch.name

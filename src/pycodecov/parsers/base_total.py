@@ -29,7 +29,7 @@ def parse_base_total_data(data: dict[str, Any]) -> BaseTotal:
     >>> base_total = parse_base_total_data(data)
     >>> base_total
     BaseTotal(files=123, lines=123, hits=123, misses=123, partials=123, coverage=12.3, branches=123, methods=123)
-    """  # noqa: E501
+    """
     files = data.get("files")
     lines = data.get("lines")
     hits = data.get("hits")
