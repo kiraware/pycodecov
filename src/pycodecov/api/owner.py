@@ -62,7 +62,7 @@ class Owner(API, schemas.Owner):
             if response.ok:
                 return parse_owner_data(data)
 
-           Error(data)
+            raise CodecovError(data)
 
     async def get_users(
         self,

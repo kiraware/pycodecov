@@ -63,7 +63,7 @@ class User(API, schemas.User):
             ...
         """
         async with self._session.get(
-           rl}/{self.service}/{self.owner_username}/users/{self.username}"
+            f"{self.api_url}/{self.service}/{self.owner_username}/users/{self.username}"
         ) as response:
             data = await response.json()
 
@@ -110,7 +110,7 @@ def parse_user_api(
     return User(
         schema.service,
         kwargs["owner_username"],
-       me,
+        schema.username,
         schema.name,
         schema.activated,
         schema.is_admin,
