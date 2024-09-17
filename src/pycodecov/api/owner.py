@@ -5,10 +5,16 @@ from aiohttp import ClientSession
 from .. import schemas
 from ..enums import Service
 from ..exceptions import CodecovError
-from ..parsers import parse_owner_data, parse_paginated_list_data, parse_user_data
+from ..parsers import (
+    parse_owner_data,
+    parse_paginated_list_data,
+    parse_repo_data,
+    parse_user_data,
+)
 from ..types import CodecovApiToken
 from .api import API
 from .paginated_list import PaginatedList, PaginatedListApi, parse_paginated_list_api
+from .repo import Repo, parse_repo_api
 from .user import User, parse_user_api
 
 __all__ = [
@@ -33,6 +39,9 @@ class Owner(API, schemas.Owner):
         API.__init__(self, token, session)
         schemas.Owner.__init__(self, service, owner_username, name)
 
+        self.service = service
+        self.owner_username = owner_username
+
     async def get_detail(self) -> schemas.Owner:
         """
         Get a single owner by name.
@@ -55,7 +64,7 @@ class Owner(API, schemas.Owner):
             ...
         """  # noqa: E501
         async with self._session.get(
-            f"{self.api_url}/{self.service}/{self.username}"
+            f"{self.api_url}/{self.service}/{self.owner_username}"
         ) as response:
             data = await response.json()
 
@@ -110,7 +119,7 @@ class Owner(API, schemas.Owner):
         params.update({k: v for k, v in optional_params.items() if v is not None})
 
         async with self._session.get(
-            f"{self.api_url}/{self.service}/{self.username}/users", params=params
+            f"{self.api_url}/{self.service}/{self.owner_username}/users", params=params
         ) as response:
             data = await response.json()
 
@@ -130,7 +139,82 @@ class Owner(API, schemas.Owner):
                 return parse_paginated_list_api(
                     paginated_list,
                     parse_user_api,
-                    owner_username=self.username,
+                    service=self.service,
+                    owner_username=self.owner_username,
+                )
+
+            raise CodecovError(data)
+
+    async def get_repos(
+        self,
+        active: bool | None = None,
+        names: list[str] | None = None,
+        page: int | None = None,
+        page_size: int | None = None,
+        search: str | None = None,
+    ) -> PaginatedListApi[Repo]:
+        """
+        Get a paginated list of repositories for the specified provider service and
+        owner username.
+
+        Args:
+            active: whether the repository has received an upload.
+            names: list of repository names.
+            page: a page number within the paginated result set.
+            page_size: number of results to return per page.
+            search: a search term which matches against the name.
+
+        Returns:
+            Paginated list of `Repo`.
+
+        Examples:
+            >>> import asyncio
+            >>> import os
+            >>> from pycodecov import Codecov
+            >>> from pycodecov.enums import Service
+            >>> async def main():
+            ...     async with Codecov(os.environ["CODECOV_API_TOKEN"]) as codecov:
+            ...         service_owners = await codecov.get_service_owners(Service.GITHUB)
+            ...         for service_owner in service_owners:
+            ...             print(await service_owner.get_repos())
+            >>> asyncio.run(main())
+            PaginatedListApi(...)
+        """  # noqa: E501
+        params = {}
+        optional_params = {
+            "active": str(active).lower() if active is not None else active,
+            "names": names,
+            "page": str(page) if page is not None else page,
+            "page_size": str(page_size) if page_size is not None else page_size,
+            "search": search,
+        }
+
+        params.update({k: v for k, v in optional_params.items() if v is not None})
+
+        async with self._session.get(
+            f"{self.api_url}/{self.service}/{self.owner_username}/repos", params=params
+        ) as response:
+            data = await response.json()
+
+            if response.ok:
+                paginated_list_data = parse_paginated_list_data(data, parse_repo_data)
+                paginated_list = PaginatedList(
+                    paginated_list_data.count,
+                    paginated_list_data.results,
+                    paginated_list_data.total_pages,
+                    parse_repo_data,
+                    paginated_list_data.next,
+                    paginated_list_data.previous,
+                    self._token,
+                    self._session,
+                )
+
+                return parse_paginated_list_api(
+                    paginated_list,
+                    parse_repo_api,
+                    service=self.service,
+                    owner_username=self.owner_username,
+                    user_username_or_ownerid=self.user_username_or_ownerid,
                 )
 
             raise CodecovError(data)

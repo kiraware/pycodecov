@@ -37,7 +37,9 @@ class User(API, schemas.User):
             self, service, user_username_or_ownerid, name, activated, is_admin, email
         )
 
+        self.service = service
         self.owner_username = owner_username
+        self.user_username_or_ownerid = user_username_or_ownerid
 
     async def get_detail(self) -> schemas.User:
         """
@@ -63,7 +65,7 @@ class User(API, schemas.User):
             ...
         """  # noqa: E501
         async with self._session.get(
-            f"{self.api_url}/{self.service}/{self.owner_username}/users/{self.username}"
+            f"{self.api_url}/{self.service}/{self.owner_username}/users/{self.user_username_or_ownerid}"
         ) as response:
             data = await response.json()
 
@@ -102,13 +104,15 @@ def parse_user_api(
     ...         "email": "string",
     ...     }
     ...     user = parse_user_data(data)
-    ...     user_api = parse_user_api(user, owner_username="string")
+    ...     user_api = parse_user_api(
+    ...         user, service=Service.GITHUB, owner_username="string"
+    ...     )
     ...     print(user_api)
     >>> asyncio.run(main())
     User(service=<Service.GITHUB: 'github'>, username='string', name='string', activated=True, is_admin=True, email='string')
     """  # noqa: E501
     return User(
-        schema.service,
+        kwargs["service"],
         kwargs["owner_username"],
         schema.username,
         schema.name,

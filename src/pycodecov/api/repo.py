@@ -1,91 +1,63 @@
+from datetime import datetime
+from typing import Any
+
+from aiohttp import ClientSession
+
 from .. import schemas
-from ..enums import Service
+from ..enums import Language, Service
 from ..exceptions import CodecovError
-from ..parsers import parse_paginated_list_data, parse_repo_config_data, parse_repo_data
+from ..parsers import parse_repo_data
+from ..types import CodecovApiToken
 from .api import API
-from .paginated_list import PaginatedList
+from .owner import Owner
 
-__all__ = ["Repo"]
+__all__ = [
+    "Repo",
+    "parse_repo_api",
+]
 
 
-class Repo(API):
+class Repo(API, schemas.Repo):
     """
     Repo API Wrapper from Codecov API.
     """
 
-    async def get_repo_list(
+    def __init__(
         self,
         service: Service,
         owner_username: str,
-        active: bool | None = None,
-        names: str | None = None,
-        page: int | None = None,
-        page_size: int | None = None,
-        search: str | None = None,
-    ) -> PaginatedList[schemas.Repo]:
-        """
-        Get a paginated list of repositories for the specified provider service and
-        owner username.
+        user_username_or_ownerid: str,
+        name: str,
+        private: bool,
+        updatestamp: datetime | None,
+        author: Owner,
+        language: Language | None,
+        branch: str,
+        active: bool | None,
+        activated: bool | None,
+        totals: schemas.CommitTotal | None,
+        token: CodecovApiToken | None = None,
+        session: ClientSession | None = None,
+    ) -> None:
+        API.__init__(self, token, session)
+        schemas.Repo.__init__(
+            self,
+            name,
+            private,
+            updatestamp,
+            author,
+            language,
+            branch,
+            active,
+            activated,
+            totals,
+        )
 
-        Args:
-            service: git hosting service provider.
-            owner_username: username from service provider.
-            active: whether the repository has received an upload.
-            names: list of repository names.
-            page: a page number within the paginated result set.
-            page_size: number of results to return per page.
-            search: a search term.
+        self.service = service
+        self.owner_username = owner_username
+        self.user_username_or_ownerid = user_username_or_ownerid
 
-        Returns:
-            Paginated list of `Repo`.
-
-        Examples:
-            >>> import asyncio
-            >>> import os
-            >>> from pycodecov import Codecov
-            >>> from pycodecov.enums import Service
-            >>> async def main():
-            ...     async with Codecov(os.environ["CODECOV_API_TOKEN"]) as codecov:
-            ...         repos = await codecov.repos.get_repo_list(
-            ...             Service.GITHUB, "jazzband"
-            ...         )
-            ...         print(repos)
-            >>> asyncio.run(main())
-            PaginatedList(...)
-        """
-        params = {}
-        optional_params = {
-            "active": str(active).lower() if active is not None else active,
-            "names": names,
-            "page": str(page) if page is not None else page,
-            "page_size": str(page_size) if page_size is not None else page_size,
-            "search": search,
-        }
-
-        params.update({k: v for k, v in optional_params.items() if v is not None})
-
-        async with self._session.get(
-            f"{self.api_url}/{service}/{owner_username}/repos/", params=params
-        ) as response:
-            data = await response.json()
-
-            if response.ok:
-                paginated_list = parse_paginated_list_data(data, parse_repo_data)
-
-                return PaginatedList(
-                    paginated_list.count,
-                    paginated_list.results,
-                    paginated_list.total_pages,
-                    parse_repo_data,
-                    paginated_list.next,
-                    paginated_list.previous,
-                    self._token,
-                    self._session,
-                )
-
-            raise CodecovError(data)
-
-    async def get_repo_detail(
+    async def get_detail(
         self, service: Service, owner_username: str, repo_name: str
     ) -> schemas.Repo:
         """
@@ -162,3 +134,50 @@ class Repo(API):
                 return parse_repo_config_data(data)
 
             raise CodecovError(data)
+
+
+def parse_repo_api(
+    schema: schemas.Repo,
+    token: CodecovApiToken | None = None,
+    session: ClientSession | None = None,
+    **kwargs: Any,
+) -> User:
+    """
+    Turn User schema into Repo API.
+
+    Args:
+        schema: repo data.
+        token: Codecov API Token.
+        session: client session.
+
+    Returns:
+        A `Repo` API.
+
+    Examples:
+    >>> import asyncio
+    >>> async def main():
+    ...     data = {
+    ...         "service": "github",
+    ...         "username": "string",
+    ...         "name": "string",
+    ...         "activated": True,
+    ...         "is_admin": True,
+    ...         "email": "string",
+    ...     }
+    ...     userrepo(data)
+    ...     user_api = parse_repo_api(user, owner_username="string")
+    ...     print(user_api)
+    >>> asyncio.run(main())
+    User(service=<Service.GITHUB: 'github'>, username='string', name='string', activated=True, is_admin=True, email='string')
+    """  # noqa: E501
+    return User(
+        schema.service,
+        kwargs["owner_username"],
+        schema.username,
+        schema.name,
+        schema.activated,
+        schema.is_admin,
+        schema.email,
+        token,
+        session,
+    )
