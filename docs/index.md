@@ -3,7 +3,7 @@
 [![Test](https://github.com/kiraware/pycodecov/workflows/Test/badge.svg)](https://github.com/kiraware/pycodecov/actions/workflows/test.yml)
 [![CodeQL](https://github.com/kiraware/pycodecov/workflows/CodeQL/badge.svg)](https://github.com/kiraware/pycodecov/actions/workflows/codeql.yml)
 [![Docs](https://readthedocs.org/projects/pycodecov/badge/?version=latest)](https://pycodecov.readthedocs.io/en/latest/?badge=latest)
-[![codecov](https://codecov.io/gh/kiraware/pycodecov/graph/badge.svg?token=PH6EUFT4V0)](https://codecov.io/gh/kiraware/pycodecov)
+[![codecov](https://codecov.io/gh/kiraware/pycodecov/graph/badge.svg?token=R7FIQXO4UP)](https://codecov.io/gh/kiraware/pycodecov)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
 [![security: bandit](https://img.shields.io/badge/security-bandit-yellow.svg)](https://github.com/PyCQA/bandit)
 [![Checked with mypy](http://www.mypy-lang.org/static/mypy_badge.svg)](http://mypy-lang.org/)
